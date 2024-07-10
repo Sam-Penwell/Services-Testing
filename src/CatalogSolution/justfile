@@ -1,0 +1,15 @@
+
+
+
+
+catalog-unit:
+    cd Catalog.Tests && dotnet test --filter "Unit"
+
+catalog-system-tests: 
+    cd Catalog.Tests && dotnet test --filter "System=All"
+
+catalog-filtered filter:
+    cd Catalog.Tests && dotnet test {{filter}}
+
+all:
+    cd Catalog.Tests && dotnet test

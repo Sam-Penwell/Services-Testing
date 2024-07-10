@@ -1,0 +1,169 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Catalog.Api",
+        "version": "1.0"
+    },
+    "paths": {
+        "/catalog/{vendor}/{application}": {
+            "post": {
+                "tags": [
+                    "ApiExtensions"
+                ],
+                "parameters": [
+                    {
+                        "name": "vendor",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "application",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCatalogItemRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CatalogItemResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/catalog/{vendor}/{application}/{version}": {
+            "get": {
+                "tags": [
+                    "ApiExtensions"
+                ],
+                "parameters": [
+                    {
+                        "name": "vendor",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "pattern": "^[a-zA-Z]+$",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "application",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CatalogItemResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CatalogItemResponse": {
+                "required": [
+                    "application",
+                    "vendor",
+                    "version"
+                ],
+                "type": "object",
+                "properties": {
+                    "vendor": {
+                        "maxLength": 100,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "application": {
+                        "maxLength": 100,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "version": {
+                        "maxLength": 10,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "annualCostPerSeat": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CreateCatalogItemRequest": {
+                "required": [
+                    "version"
+                ],
+                "type": "object",
+                "properties": {
+                    "version": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "isCommercial": {
+                        "type": "boolean"
+                    },
+                    "annualCostPerSeat": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    }
+}

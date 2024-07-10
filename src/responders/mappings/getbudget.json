@@ -1,0 +1,14 @@
+{
+    "request": {
+        "urlPath": "/budget",
+        "method": "GET"
+    },
+    "response": {
+        "status": 500,
+        "jsonBody": {
+            "asOf": "2024-07-10T19:59:16.6618501+00:00",
+            "remainingBudget": 8233.23,
+            "annualBudget": 1200000
+        }
+    }
+}

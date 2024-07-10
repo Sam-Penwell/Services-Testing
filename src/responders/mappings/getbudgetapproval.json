@@ -1,0 +1,9 @@
+{
+    "request": {
+        "urlPath": "/budget-allocations",
+        "method": "POST"
+    },
+    "response": {
+        "status": 200
+    }
+}
